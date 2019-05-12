@@ -9,18 +9,20 @@ namespace IntegerToEnglishWords
     class Program
     {
         static void Main(string[] args)
-        {
-            Util util = new Util();
-            Console.WriteLine(util.NumberToWords(int.MaxValue)); 
+        {            
+            Console.WriteLine(Util.NumberToWords(int.MaxValue));
+            Console.WriteLine(Util.NumberToWords(int.MinValue+1));
+            Console.WriteLine(Util.NumberToWords(1010203040));
         }
 
 
     }
-    public class Util
+    public static class Util
     {
-        public string NumberToWords(int num)
+        public static string NumberToWords(int num)
         {
             if (num == 0) return "Zero";
+            if (num < 0) return "Negative " + NumberToWords(Math.Abs(num));
             int billions = num / 1000000000;
             int millions = (num - billions * 1000000000) / 1000000;
             int thousands = (num - billions * 1000000000 - millions * 1000000) / 1000;
@@ -51,7 +53,7 @@ namespace IntegerToEnglishWords
 
         }
 
-        private string one(int num)
+        private static string one(int num)
         {
             switch (num)
             {
@@ -68,7 +70,7 @@ namespace IntegerToEnglishWords
             return "";
         }
 
-        private string teen(int num)
+        private static string teen(int num)
         {
             switch (num)
             {
@@ -86,7 +88,7 @@ namespace IntegerToEnglishWords
             return "";
         }
 
-        private string ten(int num)
+        private static string ten(int num)
         {
             switch (num)
             {
@@ -102,7 +104,7 @@ namespace IntegerToEnglishWords
             return "";
         }
 
-        private string twoDigit(int num)
+        private static string twoDigit(int num)
         {
             if (num == 0)
                 return "";
@@ -121,7 +123,7 @@ namespace IntegerToEnglishWords
             }
         }
 
-        private string threeDigit(int num)
+        private static string threeDigit(int num)
         {
             int hundreds = num / 100;
             int remainder = num - hundreds * 100;
